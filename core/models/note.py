@@ -6,8 +6,7 @@ from .user                      import User
 
 
 class Note(BaseModel):
-    owner       = ForeignKey(verbose_name = _("owner"), to = User, related_name = "user_notes", on_delete = CASCADE)                                
-    date        = DateField(_("date"))
+    owner       = ForeignKey(verbose_name = _("owner"), to = User, related_name = "user_notes", on_delete = CASCADE)
     title       = CharField(_("title"),         max_length = 400,   null = True, blank = True)  
     description = TextField(_("description"),   max_length = 10000, null = True, blank = True) 
 

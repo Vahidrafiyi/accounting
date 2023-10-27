@@ -6,7 +6,7 @@ from .basemodel                 import BaseModel
 from .user                      import User
 
 
-class Accout(BaseModel):
+class Account(BaseModel):
     owner           = ForeignKey(verbose_name = _("owner"), to = User, on_delete = CASCADE)
     account_title   = CharField(_("account title"),     max_length = 200)
     bank_name       = CharField(_("bank name"),         max_length = 200)
