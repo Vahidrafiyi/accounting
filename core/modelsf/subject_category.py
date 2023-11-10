@@ -2,7 +2,7 @@ from django.db.models           import (ForeignKey, CASCADE, CharField, TextFiel
 from django.utils.translation   import gettext_lazy as _
 
 from .basemodel                 import BaseModel
-from .user                      import User
+from core.models                import User
 
 
 class SubjectCategory(BaseModel):
@@ -11,7 +11,8 @@ class SubjectCategory(BaseModel):
     description   = TextField(_("description"), max_length = 1000, null = True, blank = True) 
 
     class Meta:
-        ordering = ['-title']
+        ordering            = ['-title']
+        verbose_name_plural = 'subject categories'
 
     def __str__(self):
         return self.title

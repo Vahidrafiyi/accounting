@@ -2,7 +2,7 @@ from django.db.models           import (ForeignKey, CASCADE, CharField, TextFiel
 from django.utils.translation   import gettext_lazy as _
 
 from .basemodel                 import BaseModel
-from .user                      import User
+from core.models                import User
 from .subject_category          import SubjectCategory
 
 

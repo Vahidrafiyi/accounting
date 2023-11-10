@@ -3,7 +3,7 @@ from django.db.models           import (CharField, TextField, DateTimeField,
 from django.utils.translation   import gettext_lazy as _
 
 from .basemodel                 import BaseModel
-from .user                      import User
+from core.models                import User
 from .accountside_category      import AccountSideCategory
 
 

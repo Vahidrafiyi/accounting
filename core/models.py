@@ -1,13 +1,12 @@
 import os
-import uuid
 
-from django.db.models           import (Model, UUIDField, CharField, TextField, ImageField)
+from django.db.models           import (CharField, TextField, ImageField)
 from django.contrib.auth.models import AbstractUser
 from django.core.validators     import RegexValidator
 from django.utils.translation   import gettext_lazy as _
 
-from .basemodel                 import BaseModel 
-from ..managers                 import UserManager
+from core.modelsf.basemodel     import BaseModel 
+from .managers                  import UserManager
 
 def user_image_directory(instance, filename):
     # ext      = filename.split('.')[-1]                  # Seprate the file ext.

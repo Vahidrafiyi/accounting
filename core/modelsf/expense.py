@@ -3,16 +3,16 @@ from django.db.models           import (ForeignKey, CASCADE, CharField, TextFiel
 from django.utils.translation   import gettext_lazy as _
 
 from .basemodel                 import BaseModel
-from .user                      import User
+from core.models                import User
 from .subject                   import Subject
 from .accountside               import AccountSide
 from .workspace                 import WorkSpace
-from .account                   import Accout
+from .account                   import Account
 
 
 class Expense(BaseModel):
     owner               = ForeignKey(verbose_name = _("owner"),         to = User,          related_name = 'user_expenses',         on_delete = CASCADE)
-    account             = ForeignKey(verbose_name = _("account"),       to = Accout,        related_name = 'account_expenses',      on_delete = CASCADE, null = True, blank = True)
+    account             = ForeignKey(verbose_name = _("account"),       to = Account,       related_name = 'account_expenses',      on_delete = CASCADE, null = True, blank = True)
     accountside         = ForeignKey(verbose_name = _("accountside"),   to = AccountSide,   related_name = 'accountside_expenses',  on_delete = CASCADE)
     subject             = ForeignKey(verbose_name = _("subject"),       to = Subject,       related_name = 'subject_expenses',      on_delete = CASCADE, null = True, blank = True)
     workspace           = ForeignKey(verbose_name = _("workspace"),     to = WorkSpace,     related_name = 'workspace_expenses',    on_delete = CASCADE, null = True, blank = True)

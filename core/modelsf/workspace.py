@@ -2,7 +2,7 @@ from django.db.models           import (TextField, ForeignKey, CASCADE, FloatFie
 from django.utils.translation   import gettext_lazy as _
 
 from .basemodel                 import BaseModel
-from .user                      import User
+from core.models                import User
 from .accountside               import AccountSide
 
 
