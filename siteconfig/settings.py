@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Third party libraries
     'rest_framework',
+    'rest_framework.authtoken',
 
     # Apps
     'core',
@@ -104,6 +105,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 AUTH_USER_MODEL = 'core.User'
 
