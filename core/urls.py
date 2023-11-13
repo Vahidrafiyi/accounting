@@ -13,19 +13,25 @@ from .views.user.user                                   import UserViewSet
 from .views.workspace.workspace                         import WorkSpaceViewset
 
 router = DefaultRouter()
-router.register('users',                UserViewSet)
-router.register('accounts',             AccountViewset)
-router.register('accountsides',         AccountSideViewset)
-router.register('expenses',             ExpenseViewset)
-router.register('notes',                NoteViewset)
-router.register('subjects',             SubjectViewset)
-router.register('subject-categories',   SubjectCategoryViewset)
-router.register('workspaces',           WorkSpaceViewset)
+router.register('users',                    UserViewSet)
+router.register('accountside-categories',   AccountSideCategoryViewset)
+router.register('expenses',                 ExpenseViewset)
+router.register('notes',                    NoteViewset)
+router.register('subject-categories',       SubjectCategoryViewset)
 
-accountside_router = NestedDefaultRouter(router, 'accountsides', lookup = 'accountsides')
-accountside_router.register('accountside-categories', AccountSideCategoryViewset, basename = 'accountside-category')
+user_router                 = NestedDefaultRouter(router, 'users', lookup = 'users')
+user_router.register('accounts', AccountViewset, basename = 'account')
+user_router.register('workspaces', WorkSpaceViewset, basename = 'workspace')
+
+accountside_category_router = NestedDefaultRouter(router, 'accountside-categories', lookup = 'accountside_categories')
+accountside_category_router.register('accountsides', AccountSideViewset, basename = 'accountside-category')
+
+subject_category_router     = NestedDefaultRouter(router, 'subject-categories', lookup = 'subject_categories')
+subject_category_router.register('subjects', SubjectViewset, basename = 'subject')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('', include(accountside_router.urls))
+    path('', include(user_router.urls)),
+    path('', include(accountside_category_router.urls)),
+    path('', include(subject_category_router.urls)),
 ]
