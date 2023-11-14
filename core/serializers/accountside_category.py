@@ -1,10 +1,12 @@
 from rest_framework.serializers         import ModelSerializer
 
-from core.models.accountside_category   import AccountSideCategory
-from core.serializers.user              import OwnerSerializer
+from ..serializers.is_valid_serializer  import IsValidSerializer
+from ..serializers.user                 import OwnerSerializer
+
+from ..modelsf.accountside_category     import AccountSideCategory
 
 
-class AccountSideCategorySerializer(ModelSerializer):
+class AccountSideCategorySerializer(IsValidSerializer, ModelSerializer):
     owner = OwnerSerializer()
 
     class Meta:

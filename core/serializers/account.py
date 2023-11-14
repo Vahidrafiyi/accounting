@@ -1,11 +1,17 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers         import ModelSerializer, PrimaryKeyRelatedField
 
-from core.models.account        import Account
-from core.serializers.user      import OwnerSerializer
+from ..serializers.is_valid_serializer  import IsValidSerializer
+
+from ..modelsf.account                  import Account
+from ..models                           import User
+from ..serializers.user                 import OwnerSerializer
 
 
-class AccountSerializer(ModelSerializer):
-    owner = OwnerSerializer()
+class AccountSerializer(IsValidSerializer, ModelSerializer):
+    owner = PrimaryKeyRelatedField(
+        queryset = User.objects.filter(is_deleted = False), 
+        required = True
+    )
 
     class Meta:
         model   = Account
@@ -24,3 +30,7 @@ class AccountSerializer(ModelSerializer):
             'paid_money',
             'balance',
         ]
+
+    def to_representation(self, instance):
+        self.fields['owner'] = OwnerSerializer()
+        return super().to_representation(instance)
