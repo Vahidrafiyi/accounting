@@ -1,13 +1,25 @@
-from rest_framework.serializers         import ModelSerializer
+from rest_framework.serializers                     import ModelSerializer, PrimaryKeyRelatedField
 
-from ..serializers.is_valid_serializer  import IsValidSerializer
-from ..serializers.user                 import OwnerSerializer
+from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
 
-from ..modelsf.accountside              import AccountSide
+from ..serializers.user                             import OwnerSerializer
+from ..serializers.accountside_category             import AccountSideCategorySerializer
+
+from ..modelsf.accountside                          import AccountSide
+from ..modelsf.accountside_category                 import AccountSideCategory 
+from ..models                                       import User
 
 
 class AccountSideSerializer(IsValidSerializer, ModelSerializer):
-    owner = OwnerSerializer()
+    owner       = PrimaryKeyRelatedField(
+        queryset    = User.objects.filter(is_deleted = False), 
+        required    = True
+    )
+    category    = PrimaryKeyRelatedField(
+        queryset    = AccountSideCategory.objects.filter(is_deleted = False),
+        required    = True
+    )
+
 
     class Meta:
         model   = AccountSide
@@ -24,3 +36,8 @@ class AccountSideSerializer(IsValidSerializer, ModelSerializer):
             'paid_money',
             'balance',
         ]
+
+    def to_representation(self, instance):
+        self.fields['owner']    = OwnerSerializer()
+        self.fields['category'] = AccountSideCategorySerializer
+        return super().to_representation(instance)

@@ -1,11 +1,18 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers                     import ModelSerializer, PrimaryKeyRelatedField
 
-from core.models.note           import Note
-from core.serializers.user      import OwnerSerializer
+from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
+from ..serializers.user                             import OwnerSerializer
+
+from ..modelsf.note                                 import Note
+from ..models                                       import User
 
 
-class NoteSerializer(ModelSerializer):
-    owner = OwnerSerializer()
+class NoteSerializer(IsValidSerializer, ModelSerializer):
+    owner = PrimaryKeyRelatedField(
+        queryset = User.objects.filter(is_deleted = False),
+        required = True
+    )
+
 
     class Meta:
         model   = Note
@@ -16,3 +23,7 @@ class NoteSerializer(ModelSerializer):
             'title',
             'description'
         ]
+
+    def to_representation(self, instance):
+        self.fields['owner'] = OwnerSerializer()
+        return super().to_representation(instance)

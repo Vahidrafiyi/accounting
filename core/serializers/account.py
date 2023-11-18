@@ -1,10 +1,10 @@
-from rest_framework.serializers         import ModelSerializer, PrimaryKeyRelatedField
+from rest_framework.serializers                     import ModelSerializer, PrimaryKeyRelatedField
 
-from ..serializers.is_valid_serializer  import IsValidSerializer
+from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
 
-from ..modelsf.account                  import Account
-from ..models                           import User
-from ..serializers.user                 import OwnerSerializer
+from ..modelsf.account                              import Account
+from ..models                                       import User
+from ..serializers.user                             import OwnerSerializer
 
 
 class AccountSerializer(IsValidSerializer, ModelSerializer):

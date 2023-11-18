@@ -1,4 +1,4 @@
-from ..utils.exceptions.bad_request import BadRequestException
+from ...utils.exceptions.bad_request import BadRequestException
 
 
 class IsValidSerializer:

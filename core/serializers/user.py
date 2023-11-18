@@ -1,6 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers                     import ModelSerializer
 
-from core.models.user           import User
+from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
+
+from ..models                                       import User
 
 
 # class EnhancedIsValid(ModelSerializer):
@@ -8,7 +10,7 @@ from core.models.user           import User
 #         return super().is_valid(raise_exception=raise_exception)
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(IsValidSerializer, ModelSerializer):
     class Meta:
         model   = User
         fields  = [

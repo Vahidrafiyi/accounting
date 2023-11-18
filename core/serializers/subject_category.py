@@ -1,11 +1,18 @@
-from rest_framework.serializers     import ModelSerializer
+from rest_framework.serializers                     import ModelSerializer, PrimaryKeyRelatedField
 
-from core.models.subject_category   import SubjectCategory
-from core.serializers.user          import OwnerSerializer
+from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
+from ..serializers.user                             import OwnerSerializer
+
+from ..models                                       import User
+from ..modelsf.subject_category                     import SubjectCategory
 
 
-class SubjectCategorySerializer(ModelSerializer):
-    owner = OwnerSerializer()
+class SubjectCategorySerializer(IsValidSerializer, ModelSerializer):
+    owner = PrimaryKeyRelatedField(
+        queryset = User.objects.filter(is_deleted = False),
+        required = True
+    )
+
 
     class Meta:
         model   = SubjectCategory
@@ -16,3 +23,7 @@ class SubjectCategorySerializer(ModelSerializer):
             'title',
             'description',
         ]
+
+    def to_representation(self, instance):
+        self.fields['owner'] = OwnerSerializer()
+        return super().to_representation(instance)
