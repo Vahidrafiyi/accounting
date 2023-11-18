@@ -2,6 +2,8 @@ from django.urls                                        import path, include
 
 from rest_framework_nested.routers                      import DefaultRouter, NestedDefaultRouter
 
+
+from .views.auth_token.auth_token                       import AuthTokenViewSet
 from .views.account.account                             import AccountViewset
 from .views.accountside.accountside                     import AccountSideViewset
 from .views.accountside_category.accountside_category   import AccountSideCategoryViewset
@@ -13,6 +15,7 @@ from .views.user.user                                   import UserViewSet
 from .views.workspace.workspace                         import WorkSpaceViewset
 
 router = DefaultRouter()
+router.register('tokens',                   AuthTokenViewSet)
 router.register('users',                    UserViewSet)
 router.register('accountside-categories',   AccountSideCategoryViewset)
 router.register('expenses',                 ExpenseViewset)
