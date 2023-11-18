@@ -1,8 +1,6 @@
 from django.utils.translation                   import gettext_lazy as _
 from django.shortcuts                           import get_object_or_404
 
-from rest_framework.response                    import Response
-from rest_framework                             import status
 from rest_framework.authtoken.models            import Token
 from rest_framework                             import parsers, renderers
 from rest_framework.decorators                  import action
@@ -10,14 +8,14 @@ from rest_framework.compat                      import coreapi, coreschema
 from rest_framework.schemas                     import ManualSchema
 from rest_framework.schemas                     import coreapi as coreapi_schema
 
-from core.utils.adapters.get_success_response import get_success_response
+from core.utils.adapters.get_success_response   import get_success_response
 
 
 from ...utils.exceptions.bad_request            import BadRequestException
 from ...utils.permissions.token                 import TokenPermission
 
-from ...serializers.custom_tools.auth_token     import AuthTokenSerializer
-from ...serializers.custom_tools.revoke_token   import RevokeTokenSerializer
+from ...serializers.user.auth_token             import AuthTokenSerializer
+from ...serializers.user.revoke_token           import RevokeTokenSerializer
 from ..enhanced_viewset.enhanced_viewset        import EnhancedCRUDModelViewSet
 
 
