@@ -1,14 +1,22 @@
-from django.contrib                     import admin
+from django.contrib                 import admin
 
-from core.modelsf.account               import Account
-from core.modelsf.accountside_category  import AccountSideCategory
-from core.modelsf.accountside           import AccountSide
-from core.modelsf.expense               import Expense
-from core.modelsf.note                  import Note
-from core.modelsf.subject_category      import SubjectCategory
-from core.modelsf.subject               import Subject
-from core.modelsf.workspace             import WorkSpace
-from core.models                        import User
+from .modelsf.account               import Account
+from .modelsf.accountside_category  import AccountSideCategory
+from .modelsf.accountside           import AccountSide
+from .modelsf.expense               import Expense
+from .modelsf.note                  import Note
+from .modelsf.subject_category      import SubjectCategory
+from .modelsf.subject               import Subject
+from .modelsf.workspace             import WorkSpace
+from .models                        import User
+from .modelsf.role                  import Role
+
+
+class RoleAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'title',
+    )
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -112,6 +120,7 @@ class WorkSpaceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User,                   UserAdmin)
+admin.site.register(Role,                   RoleAdmin)
 admin.site.register(Account,                AccountAdmin)
 admin.site.register(AccountSideCategory,    AccountSideCategoryAdmin)
 admin.site.register(AccountSide,            AccountSideAdmin)

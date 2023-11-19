@@ -15,12 +15,12 @@ from .views.user.user                                   import UserViewSet
 from .views.workspace.workspace                         import WorkSpaceViewset
 
 router = DefaultRouter()
-router.register('tokens',                   AuthTokenViewSet)
-router.register('users',                    UserViewSet)
-router.register('accountside-categories',   AccountSideCategoryViewset)
-router.register('expenses',                 ExpenseViewset)
-router.register('notes',                    NoteViewset)
-router.register('subject-categories',       SubjectCategoryViewset)
+router.register('tokens',                   AuthTokenViewSet,           basename = 'tokens')
+router.register('users',                    UserViewSet,                basename = 'users')
+router.register('accountside-categories',   AccountSideCategoryViewset, basename = 'accountside-categories')
+router.register('expenses',                 ExpenseViewset,             basename = 'expenses')
+router.register('notes',                    NoteViewset,                basename = 'notes')
+router.register('subject-categories',       SubjectCategoryViewset,     basename = 'subject-categories')
 
 user_router                 = NestedDefaultRouter(router, 'users', lookup = 'users')
 user_router.register('accounts', AccountViewset, basename = 'account')

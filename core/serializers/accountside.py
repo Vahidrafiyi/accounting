@@ -2,7 +2,7 @@ from rest_framework.serializers                     import ModelSerializer, Prim
 
 from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
 
-from ..serializers.user                             import OwnerSerializer
+from ..serializers.user.user                        import OwnerSerializer
 from ..serializers.accountside_category             import AccountSideCategorySerializer
 
 from ..modelsf.accountside                          import AccountSide

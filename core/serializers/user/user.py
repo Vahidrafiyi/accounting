@@ -1,13 +1,8 @@
-from rest_framework.serializers                     import ModelSerializer
+from rest_framework.serializers                         import ModelSerializer
 
-from ...serializers.custom_tools.is_valid_serializer import IsValidSerializer
+from ...serializers.custom_tools.is_valid_serializer    import IsValidSerializer
 
-from ...models                                       import User
-
-
-# class EnhancedIsValid(ModelSerializer):
-#     def is_valid(self, *, raise_exception=False):
-#         return super().is_valid(raise_exception=raise_exception)
+from ...models                                          import User
 
 
 class UserSerializer(IsValidSerializer, ModelSerializer):

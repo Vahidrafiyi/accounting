@@ -4,7 +4,7 @@ from ..serializers.custom_tools.is_valid_serializer import IsValidSerializer
 
 from ..modelsf.account                              import Account
 from ..models                                       import User
-from ..serializers.user                             import OwnerSerializer
+from ..serializers.user.user                        import OwnerSerializer
 
 
 class AccountSerializer(IsValidSerializer, ModelSerializer):

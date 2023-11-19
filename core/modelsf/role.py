@@ -6,11 +6,9 @@ from django.db.models           import (
                                 )
 from django.utils.translation   import gettext_lazy as _
 from .basemodel                 import BaseModel
-from ..models                   import User
 
 
 class Role(BaseModel):
-    owner                           = ForeignKey(verbose_name = _("owner"), to = User, on_delete = CASCADE, related_name = 'role')
     title                           = CharField(_("title"), max_length = 40)
 
     revoke_token                    = BooleanField(_("revoke token"),                   default = False)
@@ -74,3 +72,6 @@ class Role(BaseModel):
     retrieve_workspace              = BooleanField(_("retrieve workspace"),             default = False)
     update_workspace                = BooleanField(_("update workspace"),               default = False)
     destroy_workspace               = BooleanField(_("destroy workspace"),              default = False)
+
+    def __str__(self) -> str:
+        return self.title
