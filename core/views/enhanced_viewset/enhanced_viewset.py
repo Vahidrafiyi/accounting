@@ -40,7 +40,7 @@ class EnhancedCRUDModelViewSet(ModelViewSet):
         return get_success_response(self.success_messages['destroy'])
 
     def perform_destroy(self, instance):
-        instance.is_deleted = False
+        instance.is_deleted = True
         instance.save()
 
     def get_object(self):

@@ -9,7 +9,7 @@ from .basemodel                 import BaseModel
 
 
 class Role(BaseModel):
-    title                           = CharField(_("title"), max_length = 40)
+    title                           = CharField(_("title"), max_length = 40, unique = True)
 
     revoke_token                    = BooleanField(_("revoke token"),                   default = False)
 
@@ -18,6 +18,7 @@ class Role(BaseModel):
     retrieve_user                   = BooleanField(_("retrieve user"),                  default = False)
     update_user                     = BooleanField(_("update user"),                    default = False)
     destroy_user                    = BooleanField(_("destroy user"),                   default = False)
+    change_password                 = BooleanField(_("change password"),                default = False)
 
     create_role                     = BooleanField(_("create role"),                    default = False)
     list_role                       = BooleanField(_("list role"),                      default = False)

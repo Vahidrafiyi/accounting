@@ -13,10 +13,12 @@ from .views.subject.subject                             import SubjectViewset
 from .views.subject_category.subject_category           import SubjectCategoryViewset
 from .views.user.user                                   import UserViewSet
 from .views.workspace.workspace                         import WorkSpaceViewset
+from .views.role.role                                   import RoleViewSet
 
 router = DefaultRouter()
 router.register('tokens',                   AuthTokenViewSet,           basename = 'tokens')
 router.register('users',                    UserViewSet,                basename = 'users')
+router.register('roles',                    RoleViewSet,                basename = 'users')
 router.register('accountside-categories',   AccountSideCategoryViewset, basename = 'accountside-categories')
 router.register('expenses',                 ExpenseViewset,             basename = 'expenses')
 router.register('notes',                    NoteViewset,                basename = 'notes')

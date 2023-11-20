@@ -63,3 +63,12 @@ class RoleSerializer(IsValidSerializer, ModelSerializer):
             'update_workspace',
             'destroy_workspace',
         ]
+
+
+class MiniRoleSerializer(IsValidSerializer, ModelSerializer):
+    class Meta:
+        model   = Role
+        fields  = [
+            'id',
+            'title'
+        ]
