@@ -18,7 +18,7 @@ def user_image_directory(instance, filename):
 
 # for user manager
 class User(BaseModel, AbstractUser):
-    phone           = CharField(_("phone"), max_length = 17, blank = False, unique = True, validators = [RegexValidator(r'^\d{1,10}$')])
+    phone           = CharField(_("phone"), max_length = 17, blank = False, unique = True)
     address         = TextField(_("address"), max_length = 1000, blank = True, null = True) 
     image           = ImageField(_("image"), upload_to = user_image_directory, null = True, blank = True)
     role            = ForeignKey(verbose_name = _("permissions"), to = Role, on_delete = CASCADE, related_name = 'users')
