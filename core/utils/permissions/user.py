@@ -16,7 +16,8 @@ class UserPermission(BasePermission):
             'update'            : user.role.update_user,
             'partial_update'    : user.role.update_user,
             'destroy'           : user.role.destroy_user,
-            'change_password'   : user.role.change_password
+            'change_password'   : user.role.change_password,
+            'logout'            : user.role.logout
         }
 
         return permission_per_action[view.action]

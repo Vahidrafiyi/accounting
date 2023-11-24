@@ -19,6 +19,8 @@ class Role(BaseModel):
     update_user                     = BooleanField(_("update user"),                    default = False)
     destroy_user                    = BooleanField(_("destroy user"),                   default = False)
     change_password                 = BooleanField(_("change password"),                default = False)
+    logout                          = BooleanField(_("logout user"),                    default = False)
+    login                           = BooleanField(_("login user"),                     default = False)
 
     create_role                     = BooleanField(_("create role"),                    default = False)
     list_role                       = BooleanField(_("list role"),                      default = False)
