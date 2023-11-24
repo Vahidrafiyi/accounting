@@ -7,12 +7,13 @@ from ...models                                  import User
 from ...utils.adapters.get_success_response     import get_success_response
 from ...utils.adapters.delete_token             import delete_token
 from ...utils.adapters.create_token             import create_token
-from ...utils.adapters.find_user_by_username    import find_user_by_username
+from ...utils.adapters.find_user    import find_user
 from ...utils.adapters.is_user_logged_in        import is_user_logged_in
 from ...utils.permissions.user                  import UserPermission
 from ...serializers.user.user                   import UserSerializer
 from ...serializers.user.change_password        import ChangePasswordSerializer
 from ...serializers.user.login                  import LoginSerializer
+from ...serializers.user.sign_up                import SignUpSerializer
 from ...utils.exceptions.bad_request            import BadRequestException
 
 class UserViewSet(EnhancedCRUDModelViewSet):
@@ -39,6 +40,14 @@ class UserViewSet(EnhancedCRUDModelViewSet):
         create_token(request.user)
         return get_success_response('password changed successfully')
     
+    @action(methods = ['post'], detail = False, url_name = 'signup', url_path = 'signup', authentication_classes = (), permission_classes = ())
+    def sign_up(self, request, *args, **kwargs):
+        serializer = SignUpSerializer(data = request.data)
+        serializer.is_valid(raise_exception = True)
+        user = serializer.save()
+        token, created = create_token(user)
+        return get_success_response('user signed up successfully', {"token": token.key})
+    
     @action(methods = ['get'], detail = False, url_name = 'logout', url_path = 'logout')
     def logout(self, request, *args, **kwargs):
         try:
@@ -53,7 +62,7 @@ class UserViewSet(EnhancedCRUDModelViewSet):
         serializer      = LoginSerializer(data = request.data)
         serializer.is_valid(raise_exception = True)
         username        = serializer.validated_data.get('username')
-        user            = find_user_by_username(username)
+        user            = find_user(username)
         is_logged_in    = is_user_logged_in(user)
         if is_logged_in:
             raise BadRequestException('user logged in already')

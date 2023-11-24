@@ -29,6 +29,6 @@ class AccountSideSerializer(IsValidSerializer, ModelSerializer):
         ]
 
     def validate_phone(self, value):
-        if re.match('^(0|0098|\+98)9\d{9}$', value):
+        if re.match('^9\d{9}$', value):
             return value
         raise BadRequestException('phone is invalid')
