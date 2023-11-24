@@ -11,23 +11,12 @@ from ..models                                       import User
 
 
 class AccountSideSerializer(IsValidSerializer, ModelSerializer):
-    owner       = PrimaryKeyRelatedField(
-        queryset    = User.objects.filter(is_deleted = False), 
-        required    = True
-    )
-    category    = PrimaryKeyRelatedField(
-        queryset    = AccountSideCategory.objects.filter(is_deleted = False),
-        required    = True
-    )
-
 
     class Meta:
         model   = AccountSide
         fields  = [
             'id', 
             'created_at',
-            'owner',
-            'category',
             'name',
             'phone',
             'is_natural_person',
@@ -36,8 +25,3 @@ class AccountSideSerializer(IsValidSerializer, ModelSerializer):
             'paid_money',
             'balance',
         ]
-
-    def to_representation(self, instance):
-        self.fields['owner']    = OwnerSerializer()
-        self.fields['category'] = AccountSideCategorySerializer
-        return super().to_representation(instance)

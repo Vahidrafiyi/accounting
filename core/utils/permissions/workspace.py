@@ -17,5 +17,5 @@ class WorkSpacePermission(BasePermission):
             'partial_update': user.role.update_workspace,
             'destroy'       : user.role.destroy_workspace,
         }
-
+        
         return permission_per_action[view.action]

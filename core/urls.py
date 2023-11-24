@@ -24,14 +24,14 @@ router.register('expenses',                 ExpenseViewset,             basename
 router.register('notes',                    NoteViewset,                basename = 'notes')
 router.register('subject-categories',       SubjectCategoryViewset,     basename = 'subject-categories')
 
-user_router                 = NestedDefaultRouter(router, 'users', lookup = 'users')
+user_router                 = NestedDefaultRouter(router, 'users', lookup = 'user')
 user_router.register('accounts', AccountViewset, basename = 'account')
 user_router.register('workspaces', WorkSpaceViewset, basename = 'workspace')
 
-accountside_category_router = NestedDefaultRouter(router, 'accountside-categories', lookup = 'accountside_categories')
+accountside_category_router = NestedDefaultRouter(router, 'accountside-categories', lookup = 'accountside_category')
 accountside_category_router.register('accountsides', AccountSideViewset, basename = 'accountside-category')
 
-subject_category_router     = NestedDefaultRouter(router, 'subject-categories', lookup = 'subject_categories')
+subject_category_router     = NestedDefaultRouter(router, 'subject-categories', lookup = 'subject_category')
 subject_category_router.register('subjects', SubjectViewset, basename = 'subject')
 
 urlpatterns = [

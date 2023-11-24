@@ -14,19 +14,19 @@ from ...serializers.user.change_password    import ChangePasswordSerializer
 
 
 class UserViewSet(EnhancedCRUDModelViewSet):
-    success_messages = {
+    success_messages    = {
         'create'            : 'Successfully created a user',
         'list'              : 'Successfully returned a list of users ',
         'retrieve'          : 'Successfully retrieved a user',
         'partial_update'    : 'Successfully updated a user',
         'destroy'           : 'Successfully deleted a user'
     }
-    def get_queryset(self):
-        return User.objects.filter(is_deleted = False)
-    
     serializer_class    = UserSerializer
     permission_classes  = (UserPermission, IsAuthenticated)
 
+    def get_queryset(self):
+        return User.objects.filter(is_deleted = False)
+    
     @action(methods = ['post'], detail = True, url_name = 'change_password', url_path = 'change-password')
     def change_password(self, request, *args, **kwargs):
         serializer = ChangePasswordSerializer(data = request.data, context = self.get_serializer_context())

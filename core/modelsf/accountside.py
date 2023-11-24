@@ -1,5 +1,5 @@
-from django.db.models           import (CharField, TextField, DateTimeField,
-                                        ForeignKey, CASCADE, BooleanField, FloatField)
+from django.db.models           import (CharField, TextField,
+                                        ForeignKey, CASCADE, BooleanField, PositiveIntegerField)
 from django.utils.translation   import gettext_lazy as _
 
 from .basemodel                 import BaseModel
@@ -14,9 +14,9 @@ class AccountSide(BaseModel):
     phone               = CharField(_("phone"), max_length = 12, null = True, blank = True)
     is_natural_person   = BooleanField(_("natural person?"), help_text = "طرف حساب شخصی حقیقی است؟", default = True)
     description         = TextField(_("description"), max_length = 1000, null = True, blank=True)
-    received_money      = FloatField(_("received money"), default = 0, null = True, blank = True)
-    paid_money          = FloatField(_("paid money"), default = 0, null = True, blank = True)
-    balance             = FloatField(_("balance"), help_text = "باقی مانده", default = 0, null = True, blank = True)
+    received_money      = PositiveIntegerField(_("received money"), default = 0, null = True, blank = True)
+    paid_money          = PositiveIntegerField(_("paid money"), default = 0, null = True, blank = True)
+    balance             = PositiveIntegerField(_("balance"), help_text = "باقی مانده", default = 0, null = True, blank = True)
 
     class Meta:
         ordering = ['-name']

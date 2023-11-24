@@ -10,10 +10,6 @@ from ..modelsf.accountside                          import AccountSide
 
 
 class WorkSpaceSerializer(IsValidSerializer, ModelSerializer):
-    owner = PrimaryKeyRelatedField(
-        queryset = User.objects.filter(is_deleted = False),
-        required = True
-    )
     accountside = PrimaryKeyRelatedField(
         queryset = AccountSide.objects.filter(is_deleted = False),
         required = True
@@ -24,7 +20,6 @@ class WorkSpaceSerializer(IsValidSerializer, ModelSerializer):
         fields  = [
             'id', 
             'created_at',
-            'owner',
             'accountside',
             'description',
             'received_money',
@@ -33,6 +28,5 @@ class WorkSpaceSerializer(IsValidSerializer, ModelSerializer):
         ]
 
     def to_representation(self, instance):
-        self.fields['owner']        = OwnerSerializer()
         self.fields['accountside']  = AccountSideSerializer()
         return super().to_representation(instance)

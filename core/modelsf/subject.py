@@ -10,7 +10,7 @@ from .subject_category          import SubjectCategory
 class Subject(BaseModel):                            
     owner       = ForeignKey(verbose_name = _("owner"),     to = User, related_name = "user_topics", on_delete = CASCADE)                                
     category    = ForeignKey(verbose_name = _("category"),  to = SubjectCategory, related_name = "category_topics", on_delete = CASCADE)                                
-    title       = CharField(_("title"),         max_length = 200,   null = True, blank = True)  
+    title       = CharField(_("title"),         max_length = 200)  
     description = TextField(_("description"),   max_length = 1000,  null = True, blank = True) 
 
     class Meta:

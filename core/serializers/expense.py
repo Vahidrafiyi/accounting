@@ -16,13 +16,9 @@ from ..models                                       import User
 
 
 class ExpenseSerializer(IsValidSerializer, ModelSerializer):
-    owner   = PrimaryKeyRelatedField(
-        queryset = User.objects.filter(is_deleted = False),
-        required = True
-    )
     account = PrimaryKeyRelatedField(
         queryset = Account.objects.filter(is_deleted = False),
-        required = True
+        required = False
     )
     accountside = PrimaryKeyRelatedField(
         queryset = AccountSide.objects.filter(is_deleted = False),
@@ -30,11 +26,11 @@ class ExpenseSerializer(IsValidSerializer, ModelSerializer):
     )
     subject = PrimaryKeyRelatedField(
         queryset = Subject.objects.filter(is_deleted = False),
-        required = True
+        required = False
     )
     workspace = PrimaryKeyRelatedField(
         queryset = WorkSpace.objects.filter(is_deleted = False),
-        required = True
+        required = False
     )
 
 
@@ -43,7 +39,6 @@ class ExpenseSerializer(IsValidSerializer, ModelSerializer):
         fields  = [
             'id', 
             'created_at',
-            'owner',
             'account',
             'accountside',
             'subject',
@@ -57,7 +52,6 @@ class ExpenseSerializer(IsValidSerializer, ModelSerializer):
         ]
 
     def to_representation(self, instance):
-        self.fields['owner']        = OwnerSerializer()
         self.fields['account']      = AccountSerializer()
         self.fields['accountside']  = AccountSideSerializer()
         self.fields['subject']      = SubjectSerializer()
